@@ -5,7 +5,7 @@ import "./Shop.css";
 
 const Shop = () => {
 
-  const [product, setProduct] = useState([]);
+  const [products, setProduct] = useState([]);
   useEffect(() => {
     fetch("products.json")
       .then((res) => res.json())
@@ -21,31 +21,42 @@ const Shop = () => {
     addToDb(product.id);
   };
 
+  console.log(cart);
+  let totalQty = 0;
   let total = 0;
   let shipping = 0;
   let tax = 0;
   for (const item of cart) {
-    total = total + item.price;
+    item.quantity = item.quantity || 1;
+    total = total + item.price * item.quantity;
     shipping = shipping + item.shipping;
     tax = (total * 0.1).toFixed(2);
+    totalQty = totalQty + item.quantity;
+
   }
 
 
-  useEffect(() =>{
-    const storedProduct = getShoppingCart();
-    for (const item in storedProduct) {
-      const addedProduct = product.find(goodsItem => goodsItem.id === item)
-      const quantityy = storedProduct[item];
-      // console.log(addedProduct.quantity);
-      // addedProduct.quantity = quantityy;
-      console.log(addedProduct);
-      }
-  } , [product])
+useEffect( () =>{
+  const storedProduct = getShoppingCart();
+  const savedCart = [];
+  for(const id in storedProduct){
+    // console.log(id);
+    const addedProduct = products.find(product => product.id === id);
+    if(addedProduct){
+      const quantity = storedProduct[id];
+      addedProduct.quantity = quantity;
+      savedCart.push(addedProduct);
+    }
+  }
+  setCart(savedCart);
+
+
+}, [products])
 
   return (
     <div className="shop-parents max-h-[1200px]">
       <div className="product grid grid-cols-4 gap-7">
-        {product.map((p) => (
+        {products.map((p) => (
           <Product
             key={p.id}
             products={p}
@@ -57,7 +68,7 @@ const Shop = () => {
       <div className="order-summery">
         <div className=" bg-orange-200 p-5 text-black sticky top-2 p-7 rounded-md">
           <h3 className="text-black text-3xl">Order Summary</h3>
-          <h4 className="text-lg mb-2">Selected Items: {cart.length}</h4>
+          <h4 className="text-lg mb-2">Selected Items: {totalQty}</h4>
           <h4 className="text-lg mb-2">Total Price: ${total}</h4>
           <h4 className="text-lg mb-2">Total Shipping Charge: ${shipping}</h4>
           <h4 className="text-lg mb-2">Tax: ${tax}</h4>

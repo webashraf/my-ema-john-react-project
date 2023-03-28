@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { addToDb } from "../../utilities/fakedb";
+import { addToDb, getShoppingCart } from "../../utilities/fakedb";
 import Product from "../Products/Product";
 import "./Shop.css";
 
 const Shop = () => {
+
   const [product, setProduct] = useState([]);
   useEffect(() => {
     fetch("products.json")
@@ -11,7 +12,9 @@ const Shop = () => {
       .then((data) => setProduct(data));
   }, []);
 
+
   const [cart, setCart] = useState([]);
+
   const handleAddToCart = (product) => {
     const newCart = [...cart, product];
     setCart(newCart);
@@ -21,14 +24,24 @@ const Shop = () => {
   let total = 0;
   let shipping = 0;
   let tax = 0;
-  // console.log(product);
   for (const item of cart) {
-    console.log(item);
     total = total + item.price;
     shipping = shipping + item.shipping;
     tax = (total * 0.1).toFixed(2);
   }
-  // console.log(shipping);
+
+
+  useEffect(() =>{
+    const storedProduct = getShoppingCart();
+    for (const item in storedProduct) {
+      const addedProduct = product.find(goodsItem => goodsItem.id === item)
+      const quantityy = storedProduct[item];
+      // console.log(addedProduct.quantity);
+      // addedProduct.quantity = quantityy;
+      console.log(addedProduct);
+      }
+  } , [product])
+
   return (
     <div className="shop-parents max-h-[1200px]">
       <div className="product grid grid-cols-4 gap-7">

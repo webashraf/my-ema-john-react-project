@@ -1,4 +1,4 @@
-.shop-parents{
-          display: grid;
-          grid-template-columns: 5fr 1fr;
+.shop-parents {
+  display: grid;
+  grid-template-columns: 7fr 2fr;
 }

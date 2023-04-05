@@ -7,7 +7,7 @@ const Product = (props) => {
   const handleAddToCart = props.handleAddToCart;
   return (
     <div>
-      <div className="card w-full shadow-xl  border rounded-md border-sky-100 overflow-hidden">
+      <div className="card w-full shadow-xl h-[460px]  border rounded-md border-sky-100 overflow-hidden">
         <figure>
           <img
             src={img}

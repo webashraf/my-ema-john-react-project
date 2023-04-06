@@ -5,6 +5,7 @@ import App from './App'
 import './index.css'
 import Shop from './comonents/Shop/Shop'
 import Order from './comonents/Order/Order'
+import cardLoaderData from './comonents/JS/cardLoaderData'
 
 const router = createBrowserRouter([
   {
@@ -14,11 +15,12 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Shop />,
-        loader : () => fetch("products.json")
       },
       {
         path: 'order',
-        element: <Order />
+        element: <Order />,
+        loader: cardLoaderData,
+
       },
       {
         path: 'morder',

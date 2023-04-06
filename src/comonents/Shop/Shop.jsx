@@ -3,13 +3,12 @@ import { addToDb, getShoppingCart } from "../../utilities/fakedb";
 import Product from "../Products/Product";
 import "./Shop.css";
 import { useLoaderData } from "react-router-dom";
-import Ordersummery from "../Ordersummery/Ordersummery";
 import Cart from "../Cart/Cart";
+import '../GLOBALCSS/global.css'
 
 const Shop = () => {
 
 const loaderShop = useLoaderData();
-// console.log(loaderShop);
 
   const [products, setProduct] = useState([]);
   useEffect(() => {
@@ -62,7 +61,7 @@ useEffect( () =>{
 }, [products])
 
   return (
-    <div className="shop-parents gap-5 max-h-[1200px] mt-8 max-w-[1280px] w-full mx-auto">
+    <div className="global-order">
       {/* Product section */}
       <div className="product grid grid-cols-4 gap-7">
         {products.map((p) => (

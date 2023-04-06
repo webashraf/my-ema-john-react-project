@@ -1,0 +1,5 @@
+.global-order {
+  @apply gap-5 max-h-[1200px] mt-8 max-w-[1280px] w-full mx-auto;
+  display: grid;
+  grid-template-columns: 7fr 2fr;
+}

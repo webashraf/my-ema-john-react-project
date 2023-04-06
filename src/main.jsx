@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from './App'
 import './index.css'
 import Shop from './comonents/Shop/Shop'
+import Order from './comonents/Order/Order'
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'order',
-        element: <div>Order page</div>
+        element: <Order />
       },
       {
         path: 'morder',

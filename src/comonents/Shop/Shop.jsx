@@ -22,24 +22,23 @@ const loaderShop = useLoaderData();
   const [cart, setCart] = useState([]);
 
   const handleAddToCart = (product) => {
-    const newCart = [...cart, product];
+    let newCart = [];
+    const exists = cart.find(pd => pd.id === product.id);
+    
+    if (!exists) {
+      product.quantity = 1;
+      newCart = [...cart, product]
+    }
+    else{
+      exists.quantity = exists.quantity + 1;
+      const remmainig = cart.filter(pd => pd.id !== product.id);
+      newCart = [...remmainig, exists];
+    }
+
     setCart(newCart);
     addToDb(product.id);
   };
 
-  // console.log(cart);
-//   let totalQty = 0;
-//   let total = 0;
-//   let shipping = 0;
-//   let tax = 0;
-//   for (const item of cart) {
-//     item.quantity = item.quantity || 1;
-//     total = total + item.price * item.quantity;
-//     shipping = shipping + item.shipping;
-//     tax = (total * 0.1).toFixed(2);
-//     totalQty = totalQty + item.quantity;
-
-// }
 
 
 useEffect( () =>{

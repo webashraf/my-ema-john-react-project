@@ -1,10 +1,12 @@
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
+import { Link, useLoaderData } from "react-router-dom";
 import { addToDb, getShoppingCart } from "../../utilities/fakedb";
+import Cart from "../Cart/Cart";
+import '../GLOBALCSS/global.css';
 import Product from "../Products/Product";
 import "./Shop.css";
-import { useLoaderData } from "react-router-dom";
-import Cart from "../Cart/Cart";
-import '../GLOBALCSS/global.css'
 
 const Shop = () => {
 
@@ -60,6 +62,11 @@ useEffect( () =>{
 
 }, [products])
 
+const handleClearBtn = () => {
+  setCart([]); 
+  deleteShoppingCart();
+}
+
   return (
     <div className="global-order">
       {/* Product section */}
@@ -76,7 +83,18 @@ useEffect( () =>{
 
 {/**************************** Order Summery Sectionj **************************/}
       <div className="order-summery">
-        <Cart cart={cart} />
+        <Cart cart={cart} handleClearBtn={handleClearBtn} >
+          <Link to={'/order'}>
+        <button
+          onClick={handleClearBtn}
+          className="btn gap-2 bg-orange-400 border-red-500 btn-block mb-3"
+        >
+                Review Order
+          <FontAwesomeIcon className="text-lg" icon={faArrowRight} />
+        </button>
+
+          </Link>
+        </Cart>
       </div>
 {/*  */}
     </div>

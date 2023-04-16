@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthProvider, { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
+  const {user} = useContext(AuthContext);
+  console.log(user);
   return (
     <div className="border-2">
       <div className="hero min-h-screen bg-base-200">
@@ -49,9 +52,9 @@ const Login = () => {
                 <button className="btn btn-primary">Login</button>
               </div>
               <span className="text-center">
-                Already have an account?{" "}
+                New to Ema-john? {" "}
                 <Link className="btn-link" to={"/signin"}>
-                  Sign Up
+                Create New Account
                 </Link>
               </span>
             </form>

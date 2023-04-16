@@ -1,7 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
+  const [error, setError] = useState("");
+
+const handleSignUp = e =>{
+
+
+  e.preventDefault();
+  const form = e.target;
+  const email = form.email.value;
+  const password = form.password.value;
+  const confirmPass = form.confirm.value;
+  console.log(email, password, confirmPass);
+
+
+  if (password !== confirmPass) {
+    setError("Password did not matched!!");
+    return;
+  }
+  else{
+    setError("")
+  }
+
+}
+
+
+
+
+
     return (
         <div className="border-2">
         <div className="hero min-h-screen bg-base-200">
@@ -15,7 +42,7 @@ const SignUp = () => {
               </p>
             </div>
             <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 py-8">
-              <form className="card-body">
+              <form onSubmit={handleSignUp} className="card-body">
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Email</span>
@@ -66,10 +93,11 @@ const SignUp = () => {
                   <button className="btn btn-primary">Login</button>
                 </div>
                 <span className="text-center">
-                  Already have an account?{" "}
+                  <p>Already have an account?</p>
                   <Link className="btn-link" to={"/login"}>
                     Log In
                   </Link>
+                  <p className="text-red-400">{error}</p>
                 </span>
               </form>
               <span className=" w-5/6 mx-auto mb-5 flex justify-center items-center gap-4">

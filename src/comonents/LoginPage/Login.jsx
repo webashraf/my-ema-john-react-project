@@ -3,8 +3,30 @@ import { Link } from "react-router-dom";
 import AuthProvider, { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
-  const {user} = useContext(AuthContext);
-  console.log(user);
+  const {signInEmailPassword} = useContext(AuthContext);
+
+  const signInWithEmailPassowrd = e =>{
+      e.preventDefault();
+
+      const form = e.target;
+      const email = form.email.value;
+      const password = form.password.value;
+
+
+      signInEmailPassword(email, password)
+      .then(result=>{
+        const logInUser = result.user;
+        console.log(logInUser);
+      })
+      .then(err =>{
+        console.log(err);
+      })
+  }
+
+
+
+
+
   return (
     <div className="border-2">
       <div className="hero min-h-screen bg-base-200">
@@ -18,7 +40,7 @@ const Login = () => {
             </p>
           </div>
           <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 py-8">
-            <form className="card-body">
+            <form onSubmit={signInWithEmailPassowrd} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>

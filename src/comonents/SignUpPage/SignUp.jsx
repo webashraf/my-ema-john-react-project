@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../provider/AuthProvider';
 
 const SignUp = () => {
   const [error, setError] = useState("");
 
+  const {createUser} = useContext(AuthContext);
+ 
 const handleSignUp = e =>{
 
 
@@ -22,6 +25,15 @@ const handleSignUp = e =>{
   else{
     setError("")
   }
+  createUser(email, confirmPass)
+  .then(result =>{
+    const logedUser = result.user;
+    console.log(logedUser);
+  })
+  .catch(err=>{
+    console.log(err);
+    setError(err)
+  })
 
 }
 

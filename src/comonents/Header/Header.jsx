@@ -5,7 +5,7 @@ import { AuthContext } from './../provider/AuthProvider';
 
 const Header = () => {
 
-  const { logOut } = useContext(AuthContext);
+  const { logOut, user } = useContext(AuthContext);
 
   const handleLogOUt = () =>{
     logOut()
@@ -22,10 +22,10 @@ const Header = () => {
         <NavLink to={'/order'} className={({ isActive }) => isActive ? "border-b-4 border-blue-300" : ""}>Order</NavLink>
         <NavLink to={'/morder'} className={({ isActive }) => isActive ? "border-b-4 border-blue-300" : ""}>Manage rivew</NavLink>
         <NavLink to={'/inventory'} className={({ isActive }) => isActive ? "border-b-4 border-blue-300" : ""}>Manage inventory</NavLink>
-        <NavLink to={'/login'} className={({ isActive }) => isActive ? "border-b-4 border-blue-300" : ""}>Login</NavLink>
+        {!user && <NavLink to={'/login'} className={({ isActive }) => isActive ? "border-b-4 border-blue-300" : ""}>Log In</NavLink>}
 
 
-        { <NavLink onClick={logOut} to={'/'} className={({ isActive }) => isActive ? "border-b-4 border-blue-300" : ""}>Log Out</NavLink>}
+        { user && <NavLink onClick={logOut} to={'/'} className={({ isActive }) => isActive ? "border-b-4 border-blue-300" : ""}>Log Out</NavLink>}
 
 
       </ul>

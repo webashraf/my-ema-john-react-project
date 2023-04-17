@@ -11,8 +11,8 @@ const Login = () => {
       const form = e.target;
       const email = form.email.value;
       const password = form.password.value;
-
-
+      
+      
       signInEmailPassword(email, password)
       .then(result=>{
         const logInUser = result.user;
@@ -21,6 +21,7 @@ const Login = () => {
       .then(err =>{
         console.log(err);
       })
+      form.reset()
   }
 
 

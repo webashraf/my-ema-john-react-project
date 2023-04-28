@@ -1,39 +1,41 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
-  const {signInEmailPassword, signWithGooglePopUp} = useContext(AuthContext);
+  const { signInEmailPassword, signWithGooglePopUp, user } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   console.log(location);
   const from = location.state?.from?.pathname || "/";
   console.log(from);
 
+  const signInWithEmailPassowrd = (e) => {
+    e.preventDefault();
 
-  const signInWithEmailPassowrd = e =>{
-      e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
 
-      const form = e.target;
-      const email = form.email.value;
-      const password = form.password.value;
-      
-      
-      signInEmailPassword(email, password)
-      .then(result=>{
+    signInEmailPassword(email, password)
+      .then((result) => {
         const logInUser = result.user;
         console.log(logInUser);
+        // navigate(from, { replace: true });
         form.reset();
-        navigate("/");
       })
-      .then(err =>{
+      .then((err) => {
         console.log(err);
-      })
-  }
+      });
+  };
 
-
-
-
+  useEffect(() => {
+    console.log(user);
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user]);
 
   return (
     <div className="border-2">
@@ -82,12 +84,13 @@ const Login = () => {
                 <button className="btn btn-primary">Login</button>
               </div>
               <span className="text-center">
-                New to Ema-john? {" "}
+                New to Ema-john?{" "}
                 <Link className="btn-link" to={"/signin"}>
-                Create New Account
+                  Create New Account
                 </Link>
               </span>
             </form>
+
             <span className=" w-5/6 mx-auto mb-5 flex justify-center items-center gap-4">
               {" "}
               <hr className="w-1/2 inline-block" />{" "}
@@ -100,7 +103,9 @@ const Login = () => {
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/706px-Google_%22G%22_Logo.svg.png"
                 alt=""
               />
-              <span onClick={signWithGooglePopUp} className="text-xl">Continue with google</span>
+              <span onClick={signWithGooglePopUp} className="text-xl">
+                Continue with google
+              </span>
             </div>
           </div>
         </div>

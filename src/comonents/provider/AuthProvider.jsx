@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
     // Sign In With Google //
     const googleProvider = new GoogleAuthProvider();
     const signWithGooglePopUp = () =>{
-        setLoading(true);
+        // setLoading(true);
         signInWithPopup(auth, googleProvider)
         .then(result => console.log(result))
         .catch(err => console.log(err))

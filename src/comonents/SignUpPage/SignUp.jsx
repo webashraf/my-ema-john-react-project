@@ -5,7 +5,7 @@ import { AuthContext } from '../provider/AuthProvider';
 const SignUp = () => {
   const [error, setError] = useState("");
 
-  const {createUser} = useContext(AuthContext);
+  const {createUser, signWithGooglePopUp} = useContext(AuthContext);
  
 const handleSignUp = e =>{
 
@@ -102,7 +102,7 @@ const handleSignUp = e =>{
                   </label>
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn btn-primary">Login</button>
+                  <button className="btn btn-primary">Sign Up</button>
                 </div>
                 <span className="text-center">
                   <p>Already have an account?</p>
@@ -114,8 +114,8 @@ const handleSignUp = e =>{
               </form>
               <span className=" w-5/6 mx-auto mb-5 flex justify-center items-center gap-4">
                 {" "}
-                <hr className="w-1/2 inline-block" />{" "}
-                <p className="text-2xl">or</p>{" "}
+                <hr className="w-1/2 inline-block" />
+                <p className="text-2xl">or</p>
                 <hr className="inline-block w-1/2" />
               </span>
               <div className="flex items-center gap-5  justify-center w-5/6 border py-2 rounded-xl mx-auto">
@@ -124,7 +124,7 @@ const handleSignUp = e =>{
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/706px-Google_%22G%22_Logo.svg.png"
                   alt=""
                 />
-                <span className="text-xl">Continue with google</span>
+                <span onClick={signWithGooglePopUp} className="text-xl">Continue with google</span>
               </div>
             </div>
           </div>

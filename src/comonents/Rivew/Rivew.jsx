@@ -4,7 +4,7 @@ import React from "react";
 // import Rivew from './Rivew';
 
 const Rivew = ({ products, handleDeleteBtn }) => {
-  console.log(products);
+  // console.log(products);
   return (
     <div className="flex gap-5 border border-2 items-center mt-3">
       <div>

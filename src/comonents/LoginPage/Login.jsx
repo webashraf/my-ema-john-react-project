@@ -1,9 +1,15 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import AuthProvider, { AuthContext } from "../provider/AuthProvider";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
-  const {signInEmailPassword} = useContext(AuthContext);
+  const {signInEmailPassword, signWithGooglePopUp} = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
+  const from = location.state?.from?.pathname || "/";
+  console.log(from);
+
 
   const signInWithEmailPassowrd = e =>{
       e.preventDefault();
@@ -17,11 +23,12 @@ const Login = () => {
       .then(result=>{
         const logInUser = result.user;
         console.log(logInUser);
+        form.reset();
+        navigate("/");
       })
       .then(err =>{
         console.log(err);
       })
-      form.reset()
   }
 
 
@@ -93,7 +100,7 @@ const Login = () => {
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/706px-Google_%22G%22_Logo.svg.png"
                 alt=""
               />
-              <span className="text-xl">Continue with google</span>
+              <span onClick={signWithGooglePopUp} className="text-xl">Continue with google</span>
             </div>
           </div>
         </div>

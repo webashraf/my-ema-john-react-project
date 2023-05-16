@@ -12,7 +12,7 @@ const Order = () => {
     const [cart, setCart] = useState(SavedCart)
     const handleDeleteBtn = id => {
         console.log(id);
-        const remmeiningProduct = cart.filter(product => product.id !== id);
+        const remmeiningProduct = cart.filter(product => product._id !== id);
         setCart(remmeiningProduct);
         removeFromDb(id)
     }
@@ -28,7 +28,7 @@ const Order = () => {
         <div className='global-order'>
             <div className='order-section'>
                 {
-                    cart.map(product => <Rivew key={product.id} products={product} handleDeleteBtn={handleDeleteBtn}></Rivew>)
+                    cart.map(product => <Rivew key={product._id} products={product} handleDeleteBtn={handleDeleteBtn}></Rivew>)
                 }
             </div>
 

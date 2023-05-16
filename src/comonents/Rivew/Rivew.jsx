@@ -17,7 +17,7 @@ const Rivew = ({ products, handleDeleteBtn }) => {
       </div>
       <div className="ml-auto pr-4">
         <div className="bg-red-200 w-14 h-14 flex items-center justify-center rounded-full">
-          <button onClick={() => handleDeleteBtn(products.id)}>
+          <button onClick={() => handleDeleteBtn(products._id)}>
             <FontAwesomeIcon className="text-red-600 text-3xl" icon={faTrash} />
           </button>
         </div>
